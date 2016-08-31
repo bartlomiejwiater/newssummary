@@ -19,7 +19,8 @@ class ItemSaver:
         link = self.save_and_return_link(address, title, word_objects)
 
     def get_or_create_occurence(self):
-        self.occurence = Occurence.objects.get_or_create(timestamp=self.timestamp, source=self.source)
+        self.occurence = Occurence.objects.get_or_create(
+            timestamp=self.timestamp, source=self.source)
 
     def clean_title(self, title):
         clean_title = title
