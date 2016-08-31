@@ -15,7 +15,8 @@ class TestItemSaver(TestCase):
         cls.title = 'Item 01 example word na to'
 
         itemsaver = ItemSaver(cls.source, cls.timestamp)
-        itemsaver.save_link_and_words('http://www.blabla.com/item/01/', cls.title)
+        itemsaver.save_link_and_words(
+            'http://www.blabla.com/item/01/', cls.title)
 
     def test_itemsaver_creates_occurence(self):
         self.assertEqual(1, Occurence.objects.all().count())
@@ -25,7 +26,8 @@ class TestItemSaver(TestCase):
     def test_itemsaver_creates_link(self):
         self.assertEqual(1, Link.objects.all().count())
         self.assertEqual(self.title, Link.objects.first().title)
-        self.assertEqual('http://www.blabla.com/item/01/', Link.objects.first().address)
+        self.assertEqual('http://www.blabla.com/item/01/',
+                         Link.objects.first().address)
 
     def test_itemsaver_creates_words(self):
         words = self.title.split(' ')
@@ -42,3 +44,21 @@ class TestItemSaver(TestCase):
 
     def test_itemsaver_connects_words_and_link(self):
         self.assertEqual(4, Link.objects.first().words.count())
+
+
+class Test(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(Test, cls).setUpClass()
+
+        cls.source = 'BLABLA'
+        cls.timestamp = make_aware(datetime(2015, 1, 1, 5, 30, 30))
+        cls.title = 'Gol, gol, gol'
+
+        itemsaver = ItemSaver(cls.source, cls.timestamp)
+        itemsaver.save_link_and_words(
+            'http://www.blabla.com/item/01/', cls.title)
+
+    def test_cs_mind_case(self):
+        self.assertEqual(2, Word.objects.all().count())
