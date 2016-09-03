@@ -56,7 +56,7 @@ class Test(TestCase):
 
         cls.source = 'BLABLA'
         cls.timestamp = make_aware(datetime(2015, 1, 1, 5, 30, 30))
-        cls.title = 'Gol gol gol'
+        cls.title = 'Gol, gol, gol'
 
         itemsaver = ItemSaver(cls.source, cls.timestamp)
         itemsaver.save_link_and_words(
