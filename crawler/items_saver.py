@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from crawler.title_cleaner import TitleCleaner
 from core.models import Occurence, Link, Word
 
 
@@ -23,8 +24,8 @@ class ItemSaver:
             timestamp=self.timestamp, source=self.source)
 
     def clean_title(self, title):
-        clean_title = title
-        return title
+        clean_title = TitleCleaner(title).clean()
+        return clean_title
 
     def save_word(self, clean_title):
         word_objects = []
