@@ -3,7 +3,7 @@
 import re
 
 unwanted_words = ['a', 'albo', 'ale', 'bo', 'by', 'był', 'co', 'czy', 'dla',
-                  'dla', 'do', 'do', 'dot', 'dot.', 'go', 'gdy', 'gdzie', 'i', 'jak',
+                  'dla', 'do', 'dot', 'dot.', 'go', 'gdy', 'gdzie', 'i', 'jak',
                   'jest', 'jest', 'już', 'lat', 'ma', 'mln', 'mln', 'na', 'na',
                   'nie', 'niż', 'niżej', 'o', 'od', 'ona', 'one', 'ono', 'po',
                   'r', 'r', 'się', 'są', 'tak', 'ten', 'to', 'tys', 'u', 'w',
