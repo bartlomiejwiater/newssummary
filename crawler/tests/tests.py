@@ -31,10 +31,12 @@ class TestItemSaver(TestCase):
 
     def test_itemsaver_creates_words(self):
         words = self.title.split(' ')
-        self.assertEqual(1, len(Word.objects.filter(name=words[0])))
+        self.assertEqual(0, len(Word.objects.filter(name=words[0])))
         self.assertEqual(1, len(Word.objects.filter(name=words[1])))
-        self.assertEqual(1, len(Word.objects.filter(name=words[2])))
+        self.assertEqual(0, len(Word.objects.filter(name=words[2])))
         self.assertEqual(1, len(Word.objects.filter(name=words[3])))
+        self.assertEqual(1, len(Word.objects.filter(name=words[4])))
+        self.assertEqual(1, len(Word.objects.filter(name=words[5])))
 
     def test_itemsaver_cleans_words_in_title(self):
         self.fail('Write me!')
