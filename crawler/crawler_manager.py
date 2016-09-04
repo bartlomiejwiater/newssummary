@@ -10,6 +10,7 @@ sl = namedtuple('SourceLink', ['link', 'source_name'])
 sourcelinks = [
     sl('http://www.bankier.pl/rss/wiadomosci.xml', 'BANKIER'),
     sl('http://www.gazetaprawna.pl/rss.xml', 'GAZETAPRAWNA'),
+    sl('http://gosc.pl/rss/rtr/c7a21.Aktualnosci-z-Gosciem-Niedzielnym', 'GOŚĆNIEDZIELNY')
     sl('http://fakty.interia.pl/polska/feed', 'INTERIA'),
     sl('http://www.money.pl/rss/main.xml', 'MONEY.PL'),
     sl('http://www.polsatnews.pl/rss/kraj.xml', 'POLSAT'),

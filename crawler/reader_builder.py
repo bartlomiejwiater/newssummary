@@ -12,5 +12,7 @@ class ReaderBuilder:
             return RssReader(link)
         elif 'tvp.info' in link:
             return RssReader(link)
+        elif 'rss' in link and 'gosc.pl' in link:
+            return RssReader(link)
         else:
             raise NotImplementedError
