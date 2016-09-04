@@ -17,7 +17,8 @@ class ItemSaver:
 
         clean_title = self.clean_title(title)
         word_objects = self.save_words(clean_title)
-        link = self.save_and_return_link(address, title, word_objects)
+        link = self.save_link(address, title, word_objects)
+        self.connect_words_and_link(word_objects, link)
 
     def get_or_create_occurence(self):
         self.occurence, created = Occurence.objects.get_or_create(
@@ -35,9 +36,10 @@ class ItemSaver:
             Rate.objects.increase_or_create(word_object, self.occurence)
         return word_objects
 
-    def save_and_return_link(self, address, title, words_to_connect):
+    def save_link(self, address, title, words_to_connect):
         link, o = Link.objects.get_or_create(address=address, title=title)
-
-        for word in words_to_connect:
-            link.words.add(word)
+        Rate.objects.increase_or_create(link, self.occurence)
         return link
+
+    def connect_words_and_link(self, words, link):
+        link.words.add(*words)

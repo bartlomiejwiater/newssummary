@@ -49,6 +49,10 @@ class TestItemSaver(TestCase):
         word = Word.objects.get(name='wcześnie')
         assert word.rate.all().count() == 1
 
+    def test_itemsaver_creates_rank_for_link(self):
+        link = Link.objects.get(address='http://www.blabla.com/item/01/')
+        assert link.rate.all().count() == 1
+
 
 class TestItemSaver_MindCase(TestCase):
 
@@ -62,10 +66,3 @@ class TestItemSaver_MindCase(TestCase):
 
     def test_itemsaver_mind_case(self):
         self.assertEqual(2, Word.objects.all().count())
-
-    def test_itemsaver_creates_rate_for_each_item(self):
-        Gol = Word.objects.get(name='Gol')
-        assert Gol.rate.all().count() == 1
-
-        gol = Word.objects.get(name='gol')
-        assert gol.rate.all().count() == 1
