@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from crawler.reader_builder import ReaderBuilder
 from crawler.readers import RssReader
 import pytest

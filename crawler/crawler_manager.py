@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.utils.timezone import datetime, make_aware
 from crawler.reader_builder import ReaderBuilder
 from crawler.items_saver import ItemSaver
