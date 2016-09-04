@@ -44,7 +44,7 @@ class Word(models.Model):
 
 
 class Link(models.Model):
-    address = models.URLField(unique=True, null=False)
+    address = models.URLField(null=False)
     title = models.TextField(null=False)
     words = models.ManyToManyField(to=Word)
     rate = GenericRelation(Rate)
