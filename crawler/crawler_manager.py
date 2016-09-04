@@ -5,11 +5,22 @@ from crawler.reader_builder import ReaderBuilder
 from crawler.items_saver import ItemSaver
 from collections import namedtuple
 
-SourceLink = namedtuple('SourceLink', ['link', 'source_name'])
+sl = namedtuple('SourceLink', ['link', 'source_name'])
 
 sourcelinks = [
-    SourceLink('http://wiadomosci.wp.pl/kat,1342,ver,rss,rss.xml', 'WP'),
-    SourceLink('http://wiadomosci.wp.pl/kat,1356,ver,rss,rss.xml', 'WP'),
+    sl('http://www.bankier.pl/rss/wiadomosci.xml', 'BANKIER'),
+    sl('http://www.gazetaprawna.pl/rss.xml', 'GAZETAPRAWNA'),
+    sl('http://fakty.interia.pl/polska/feed', 'INTERIA'),
+    sl('http://www.money.pl/rss/main.xml', 'MONEY.PL'),
+    sl('http://www.polsatnews.pl/rss/kraj.xml', 'POLSAT'),
+    sl('http://www.rmf24.pl/fakty/polska/feed', 'RMF24'),
+    sl('http://www.tokfm.pl/pub/rss/tokfmpl_polska.xml', 'TOKFM'),
+    sl('http://www.tvn24.pl/najnowsze.xml', 'TVN24'),
+    sl('http://www.tvn24.pl/najwazniejsze.xml', 'TVN24'),
+    sl('http://www.tvp.info/tvp.info/rss+xml.php?object_id=191865', 'TVPINFO'),
+    sl('http://wiadomosci.wp.pl/kat,1342,ver,rss,rss.xml', 'WP'),
+    sl('http://wiadomosci.wp.pl/kat,1356,ver,rss,rss.xml', 'WP'),
+    sl('http://serwisy.gazeta.pl/pub/rss/najnowsze_wyborcza.xml', 'WYBORCZA'),
 ]
 
 
@@ -26,4 +37,5 @@ class CrawlerManager:
                 for address, title in reader.get_titles_and_addresses():
                     itemsaver.save_link_and_words(address, title)
             except NotImplementedError:
+                print('Did not get Reader for {}'.format(sourcelink.link))
                 continue
