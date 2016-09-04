@@ -9,7 +9,8 @@ unwanted_words = ['a', 'albo', 'ale', 'bo', 'by', 'był', 'co', 'czy', 'dla',
                   'r', 'r', 'się', 'są', 'tak', 'ten', 'to', 'tys', 'u', 'w',
                   'ws', 'ws.', 'z', 'za', 'ze', 'zł', 'że', 'ze']
 
-unwanted_chars = [',', '.', '/', '?', ';', ':', '(', ')', '!', '"', "'", '-']
+unwanted_chars = [',', '.', '/', '?', ';', ':',
+                  '(', ')', '!', '„', '”', '"', "'", '-']
 
 
 class TitleCleaner:
@@ -27,7 +28,7 @@ class TitleCleaner:
         title_copy = ''.join(self.title)
         for char in unwanted_chars:
             if '-' == char and char in title_copy:
-                title_copy = re.sub('(?!<=[\d])-(?!lat)', '', title_copy)
+                title_copy = re.sub('(?!<=[\d])-(?!l[a,e]t)', '', title_copy)
             elif (',' == char or '.' == char) and char in title_copy:
                 char_match = '\.' if '.' == char else ','
                 title_copy = re.sub('(?!<=[\d]){}(?![\d])'.format(

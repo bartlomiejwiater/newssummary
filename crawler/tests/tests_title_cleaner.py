@@ -15,8 +15,9 @@ import pytest
     ('5-latka 15-latka latka -',
      '5-latka 15-latka latka'),
     ('Od dwóch lat zmniejsza się w Polsce stopa bezrobocia. W II kw. 2016 r., według danych Eurostat i GUS (BAEL), wynosiła 6,2 proc. ',
-     'dwóch zmniejsza Polsce stopa bezrobocia II kw 2016 według danych Eurostat GUS BAEL wynosiła 6,2 proc',)
-
+     'dwóch zmniejsza Polsce stopa bezrobocia II kw 2016 według danych Eurostat GUS BAEL wynosiła 6,2 proc'),
+    ('Tłumy na kiermaszu 8-letniej Asi, która chce pomóc mamie.',
+     'Tłumy kiermaszu 8-letniej Asi która chce pomóc mamie'),
 ])
 def test_titlecleaner_removes_unwanted_chars_and_words(test_input, expected):
     ts = TitleCleaner(test_input)
