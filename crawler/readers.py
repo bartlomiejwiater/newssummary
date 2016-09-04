@@ -19,7 +19,11 @@ class Reader:
 class RssReader(Reader):
 
     def get_titles_and_addresses(self):
-        source = self.open_link()
+        try:
+            source = self.open_link()
+        except urllib.error.URLError:
+            print('Couldnt open {}'.format(self.link))
+            return None
         tree = feedparser.parse(source)
         entries = tree['entries']
         for entry in entries:
