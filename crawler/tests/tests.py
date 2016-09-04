@@ -39,28 +39,29 @@ class TestItemSaver(TestCase):
         self.assertEqual(1, len(Word.objects.filter(name=words[5])))
 
     def test_itemsaver_cleans_words_in_title(self):
-        self.fail('Write me!')
-
-    def test_itemsaver_creates_rate_for_each_item(self):
-        self.fail('Write me!')
+        with self.assertRaises(Word.DoesNotExist):
+            Word.objects.get(name='Za')
 
     def test_itemsaver_connects_words_and_link(self):
         self.assertEqual(4, Link.objects.first().words.count())
 
 
-class Test(TestCase):
+class TestItemSaver_MindCase(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        super(Test, cls).setUpClass()
+        super(TestItemSaver_MindCase, cls).setUpClass()
 
-        cls.source = 'BLABLA'
-        cls.timestamp = make_aware(datetime(2015, 1, 1, 5, 30, 30))
-        cls.title = 'Gol, gol, gol'
-
-        itemsaver = ItemSaver(cls.source, cls.timestamp)
+        itemsaver = ItemSaver('source', make_aware(datetime.now()))
         itemsaver.save_link_and_words(
-            'http://www.blabla.com/item/01/', cls.title)
+            'http://www.blabla.com/item/01/', 'Gol, gol, gol')
 
-    def test_cs_mind_case(self):
+    def test_itemsaver_mind_case(self):
         self.assertEqual(2, Word.objects.all().count())
+
+    def test_itemsaver_creates_rate_for_each_item(self):
+        Gol = Word.objects.get(name='Gol')
+        assert Gol.rate.all().count() == 1
+
+        gol = Word.objects.get(name='gol')
+        assert gol.rate.all().count() == 1
