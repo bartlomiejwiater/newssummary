@@ -1,7 +1,8 @@
 from django.test import TestCase
 from crawler.items_saver import ItemSaver
-from core.models import Link, Occurence, Word
+from core.models import Link, Occurence, Word, Rate
 from django.utils.timezone import datetime, make_aware
+import pytest
 
 
 class TestItemSaver(TestCase):
@@ -66,3 +67,13 @@ class TestItemSaver_MindCase(TestCase):
 
     def test_itemsaver_mind_case(self):
         self.assertEqual(2, Word.objects.all().count())
+
+
+@pytest.mark.parametrize("expected_class", [(Link), (Word), (Rate), (Occurence)])
+@pytest.mark.django_db
+def test_itemsaver_does_not_save_empty_title(expected_class):
+
+    itemsaver = ItemSaver('source', make_aware(datetime.now()))
+    itemsaver.save_link_and_words('http://www.blabla.com/item/01/', ' ')
+
+    assert expected_class.objects.all().count() == 0

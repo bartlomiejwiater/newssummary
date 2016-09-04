@@ -12,6 +12,10 @@ class ItemSaver:
         self.occurence = None
 
     def save_link_and_words(self, address, title):
+
+        if not title.strip():
+            return
+
         if not self.occurence:
             self.get_or_create_occurence()
 
