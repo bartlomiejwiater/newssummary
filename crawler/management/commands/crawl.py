@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from django.core.management import BaseCommand
+from crawler.crawler_manager import CrawlerManager
 
 
 class Command(BaseCommand):
-    # Show this when the user types help
-    help = "My test command"
+    help = "My crawl command."
 
-    # A command must define handle()
     def handle(self, *args, **options):
+        cm = CrawlerManager()
+        cm.crawl()
         self.stdout.write("Doing All The Things!")
