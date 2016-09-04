@@ -45,6 +45,10 @@ class TestItemSaver(TestCase):
     def test_itemsaver_connects_words_and_link(self):
         self.assertEqual(4, Link.objects.first().words.count())
 
+    def test_itemsaver_creates_rank_for_word(self):
+        word = Word.objects.get(name='wcześnie')
+        assert word.rate.all().count() == 1
+
 
 class TestItemSaver_MindCase(TestCase):
 
