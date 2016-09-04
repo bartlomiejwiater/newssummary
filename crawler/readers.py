@@ -10,6 +10,7 @@ class Reader:
         self.link = link
 
     def open_link(self):
+        print('opening... {}'.format(self.link))
         f = urllib.request.urlopen(self.link)
         source = f.read()
         return source
