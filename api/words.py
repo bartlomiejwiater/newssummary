@@ -15,8 +15,26 @@ class WordsList(APIView):
         """
         Return a list of all words.
         """
-        words = [{'name': word.name, 'id': word.id, 'weight': word.weight}
-                 for word in Word.objects.all()
-                 # .filter(rate__occurence__timestamp__date=datetime.datetime.today())
-                 .annotate(weight=Sum('rate__weight')).order_by('-weight')[60:]]
-        return Response(words)
+        startdate, enddate = None, None
+
+        if 'startdate' in request.GET:
+            startdate = request.GET['startdate']
+        if 'enddate' in request.GET:
+            enddate = request.GET['enddate']
+
+        words = Word.objects.all().values('id', 'name')
+
+        if startdate and enddate:
+            words = words.filter(
+                rate__occurence__timestamp__date__in=[startdate, enddate])
+        elif startdate and enddate is None:
+            words = words.filter(
+                rate__occurence__timestamp__date__gte=startdate)
+        elif startdate is None and enddate:
+            words = words.filter(rate__occurence__timestamp__date__lte=enddate)
+
+        words = words.annotate(
+            weight=Sum('rate__weight')).order_by('-weight')[:60]
+
+        results = {'results': words}
+        return Response(results)

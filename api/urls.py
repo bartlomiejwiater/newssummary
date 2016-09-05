@@ -4,5 +4,5 @@ from django.conf.urls import url, include
 from api.words import WordsList
 
 urlpatterns = [
-    url(r'^api/words/', WordsList.as_view())
+    url(r'^api/words/', WordsList.as_view(), name='words-list')
 ]
