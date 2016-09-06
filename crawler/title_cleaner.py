@@ -28,7 +28,9 @@ class TitleCleaner:
         title_copy = ''.join(self.title)
         for char in unwanted_chars:
             if '-' == char and char in title_copy:
-                title_copy = re.sub('(?!<=[\d])-(?!l[a,e]t)', '', title_copy)
+                pat = '(?!<=[\d])-(?!((l[a,e]t)|(mie|dzienne|dniowe|wieczn)))'
+                title_copy = re.sub(pat, '', title_copy)
+
             elif (',' == char or '.' == char) and char in title_copy:
                 char_match = '\.' if '.' == char else ','
                 title_copy = re.sub('(?!<=[\d]){}(?![\d])'.format(
