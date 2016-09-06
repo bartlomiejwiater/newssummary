@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse
+from rest_framework import status
 
 from datetime import date
 from django.utils.timezone import datetime, make_aware
@@ -44,6 +45,18 @@ class TestWordsList(APITestCase, Factory):
 
         cls.create_word_rate_occurence(
             cls, 'test_word', 'testsource', datetime.now())
+
+    def test_get(self):
+        url = reverse('words-list')
+        response = self.client.get(url, content_type='application/json')
+
+        assert response.status_code == status.HTTP_200_OK
+
+    def test_post(self):
+        url = reverse('words-list')
+        response = self.client.post(url, content_type='application/json')
+
+        assert response.status_code == status.HTTP_405_METHOD_NOT_ALLOWED
 
     def test_returns_results_list(self):
         url = reverse('words-list')
