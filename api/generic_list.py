@@ -29,6 +29,10 @@ class GenericList(APIView):
         elif self.list_class == Link:
             words = self.list_class.objects.all().values('id', 'title', 'address')
 
+        if 'words' in request.GET and self.list_class == Link:
+            wanted_words = request.GET.getlist('words')
+            words = self.fiter_links_according_to_word(words, wanted_words)
+
         if startdate and enddate:
             words = words.filter(
                 rate__occurence__timestamp__date__range=(startdate, enddate))
@@ -47,3 +51,6 @@ class GenericList(APIView):
 
         results = {'results': words}
         return Response(results)
+
+    def fiter_links_according_to_word(self, wanted_words):
+        raise NotImplementedError
