@@ -4,37 +4,10 @@ from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse
 from rest_framework import status
 
-from datetime import date
-from django.utils.timezone import datetime, make_aware
+from django.utils.timezone import datetime
 from furl import furl
 
-from core.models import Word, Rate, Occurence
-
-
-class Factory:
-
-    def create_word_rate_occurence(self,  name, source, dt, rate=1):
-        word, created = Word.objects.get_or_create(name=name)
-        timestamp = make_aware(dt)
-        occurence, created = Occurence.objects.get_or_create(
-            timestamp=timestamp, source=source)
-
-        for x in range(rate):
-            Rate.objects.increase_or_create(word, occurence)
-
-    def get_results(self, response):
-        return response.data['results']
-
-    def get_weight(self, response, item):
-        if isinstance(item, int):
-            return self.get_results(response)[item]['weight']
-        else:
-            for word in self.get_results(response):
-                if word['name'] == item:
-                    return word['weight']
-
-    def get_names(self, response):
-        return [x['name'] for x in response.data['results']]
+from api.tests.factory import Factory
 
 
 class TestWordsList(APITestCase, Factory):
