@@ -16,6 +16,7 @@ class WordsList(APIView):
         Return a list of all words.
         """
         startdate, enddate = None, None
+        source = None
 
         if 'startdate' in request.GET:
             startdate = request.GET['startdate']
@@ -32,6 +33,10 @@ class WordsList(APIView):
                 rate__occurence__timestamp__date__gte=startdate)
         elif startdate is None and enddate:
             words = words.filter(rate__occurence__timestamp__date__lte=enddate)
+
+        if 'source' in request.GET:
+            source = request.GET.getlist('source')
+            words = words.filter(rate__occurence__source__in=source)
 
         words = words.annotate(
             weight=Sum('rate__weight')).order_by('-weight')[:60]

@@ -13,9 +13,9 @@ from core.models import Word, Rate, Occurence
 class Factory:
 
     def create_word_rate_occurence(self,  name, source, dt, rate=1):
-        word, cretaed = Word.objects.get_or_create(name=name)
+        word, created = Word.objects.get_or_create(name=name)
         timestamp = make_aware(dt)
-        occurence = Occurence.objects.create(
+        occurence, created = Occurence.objects.get_or_create(
             timestamp=timestamp, source=source)
 
         for x in range(rate):
@@ -129,3 +129,58 @@ class TestWordsListDateFilteringAndSorting(APITestCase, Factory):
         response = self.client.get(url, content_type='application/json')
 
         assert self.get_weight(response, 0) >= self.get_weight(response, 1)
+
+
+class TestWordsListSourceFiltering(APITestCase, Factory):
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestWordsListSourceFiltering, cls).setUpClass()
+
+        cls.create_word_rate_occurence(
+            cls, 'test_word1', 'test.source1', datetime(2015, 3, 3, 12))
+
+        cls.create_word_rate_occurence(
+            cls, 'test_word1', 'testsource2', datetime(2015, 3, 4, 12))
+
+        cls.create_word_rate_occurence(
+            cls, 'test_word2', 'testsource2', datetime(2015, 3, 5, 12))
+
+        cls.create_word_rate_occurence(
+            cls, 'test_word3', 'testsource3', datetime(2015, 3, 6, 12))
+
+    def test_returns_words_only_from_source(self):
+        kwargs = {'source': 'test.source1'}
+        url = furl(reverse('words-list')).add(kwargs).url
+        response = self.client.get(url, content_type='application/json')
+
+        names = self.get_names(response)
+
+        assert 'test_word1' in names
+        assert 'test_word2' not in names
+        assert 'test_word3' not in names
+
+    def test_returns_words_weight_only_from_source(self):
+        kwargs = {'source': 'test.source1'}
+        url = furl(reverse('words-list')).add(kwargs).url
+        response = self.client.get(url, content_type='application/json')
+
+        names = self.get_names(response)
+
+        assert 1 == self.get_weight(response, 'test_word1')
+
+    def test_returns_words_only_from_many_sources(self):
+        kwargs = {'source': ['test.source1', 'testsource2']}
+        url = furl(reverse('words-list')).add(kwargs).url
+        print(url)
+        response = self.client.get(url, content_type='application/json')
+
+        names = self.get_names(response)
+
+        assert 'test_word1' in names
+        assert 2 == self.get_weight(response, 'test_word1')
+
+        assert 'test_word2' in names
+        assert 1 == self.get_weight(response, 'test_word2')
+
+        assert 'test_word3' not in names
