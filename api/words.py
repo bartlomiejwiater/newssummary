@@ -26,7 +26,7 @@ class WordsList(APIView):
 
         if startdate and enddate:
             words = words.filter(
-                rate__occurence__timestamp__date__in=[startdate, enddate])
+                rate__occurence__timestamp__date__range=(startdate, enddate))
         elif startdate and enddate is None:
             words = words.filter(
                 rate__occurence__timestamp__date__gte=startdate)
