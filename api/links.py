@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from api.generic_list import GenericList
-from core.models import Word
+from core.models import Link
 
 
-class WordsList(GenericList):
-    list_class = Word
+class LinksList(GenericList):
+    list_class = Link
