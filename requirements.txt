@@ -2,6 +2,8 @@ Django==1.10
 -e git+https://github.com/django-debug-toolbar/django-debug-toolbar.git@e7a9ed0c3de1c8635f7e8c83349cb77cef42489f#egg=django_debug_toolbar
 djangorestframework==3.4.6
 feedparser==5.2.1
+furl==0.5.2
+orderedmultidict==0.7.6
 pkg-resources==0.0.0
 py==1.4.31
 pytest==3.0.1
