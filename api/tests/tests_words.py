@@ -151,14 +151,11 @@ class TestWordsListSourceFiltering(APITestCase, Factory):
         url = furl(reverse('words-list')).add(kwargs).url
         response = self.client.get(url, content_type='application/json')
 
-        names = self.get_names(response)
-
         assert 1 == self.get_weight(response, 'test_word1')
 
     def test_returns_words_only_from_many_sources(self):
         kwargs = {'source': ['test.source1', 'testsource2']}
         url = furl(reverse('words-list')).add(kwargs).url
-        print(url)
         response = self.client.get(url, content_type='application/json')
 
         names = self.get_names(response)
