@@ -14,5 +14,7 @@ class ReaderBuilder:
             return RssReader(link)
         elif 'rss' in link and 'gosc.pl' in link:
             return RssReader(link)
+        elif 'forsal' in link and 'atom' in link:
+            return RssReader(link)
         else:
             raise NotImplementedError
