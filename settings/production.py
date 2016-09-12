@@ -1,10 +1,6 @@
 from settings.base import *
+from settings.db import DATABASES as db_prod_settings
 
-DEBUG = True
+DEBUG = False
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = db_prod_settings
