@@ -22,8 +22,8 @@ sourcelinks = [
     sl('http://wiadomosci.wp.pl/kat,1342,ver,rss,rss.xml', 'WP'),
     sl('http://wiadomosci.wp.pl/kat,1356,ver,rss,rss.xml', 'WP'),
     sl('http://serwisy.gazeta.pl/pub/rss/najnowsze_wyborcza.xml', 'WYBORCZA'),
-    s1('http://forsal.pl/atom/najnowsze', 'FORSAL'),
-    s1('http://forsal.pl/atom/forsal', 'FORSAL')
+    sl('http://forsal.pl/atom/najnowsze', 'FORSAL'),
+    sl('http://forsal.pl/atom/forsal', 'FORSAL')
 ]
 
 
