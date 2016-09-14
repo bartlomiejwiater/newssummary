@@ -9,6 +9,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 media
+static/
 
 
 ### PyCharm ###
@@ -212,3 +213,8 @@ GitHub.sublime-settings
 
 #database details
 settings/db.py
+
+# js and css Dependency
+templates/css/*
+!templates/css/jumbotron-narrow.css
+templates/js/*
