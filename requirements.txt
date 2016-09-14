@@ -11,5 +11,6 @@ pytest-django==3.0.0
 python-dateutil==2.5.3
 python-mimeparse==1.5.2
 pytz==2016.6.1
+requests==2.11.1
 six==1.10.0
 sqlparse==0.2.1
