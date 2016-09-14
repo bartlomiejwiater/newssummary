@@ -7,7 +7,7 @@ from api.urls import urlpatterns as api_urlspatter
 from stats.urls import urlpatterns as stats_urlpatters
 
 urlpatterns = [
-    url(r'^stats', include('stats.urls')),
+    url(r'^', include('stats.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('api.urls')),
 ]

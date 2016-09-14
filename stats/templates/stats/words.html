@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block form %}
+{% endblock %}
+
+
+{% block body %}
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Weight</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for word in words %}
+      <tr>
+        <td><input type="checkbox"></td>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ word.name }}</td>
+        <td>{{ word.weight }}</td>
+        <td><a href="#" class="btn btn-primary btn-xs">History</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

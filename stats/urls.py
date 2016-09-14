@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     # ex: /stats/
-    url(r'^', views.temp, name='index'),
+    url(r'^words/', views.words, name='stats-words-list'),
 ]
