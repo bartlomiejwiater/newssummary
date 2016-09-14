@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'crawler',
     'api',
     'stats',
-    'django.contrib.sites'
+    'django.contrib.sites',
+    'crispy_forms',
 ]
 
 SITE_ID = 1
@@ -118,3 +119,5 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ),
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
