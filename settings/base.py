@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'core',
     'crawler',
     'api',
+    'stats'
 ]
 
 MIDDLEWARE = [
