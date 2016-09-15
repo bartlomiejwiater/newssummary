@@ -217,4 +217,5 @@ settings/db.py
 # js and css Dependency
 templates/css/*
 !templates/css/jumbotron-narrow.css
+!templates/css/select2.css
 templates/js/*

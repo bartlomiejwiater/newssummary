@@ -1,6 +1,8 @@
 Django==1.10
+django-appconf==1.0.2
 django-crispy-forms==1.6.0
 -e git+https://github.com/django-debug-toolbar/django-debug-toolbar.git@e7a9ed0c3de1c8635f7e8c83349cb77cef42489f#egg=django_debug_toolbar
+Django-Select2==5.8.9
 djangorestframework==3.4.6
 feedparser==5.2.1
 furl==0.5.2
