@@ -1,4 +1,7 @@
 from django import forms
+from django.contrib.sites.models import Site
+from django_select2.forms import HeavySelect2MultipleWidget, HeavySelect2TagWidget
+from django.urls import reverse
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -18,7 +21,8 @@ class WordsForm(forms.Form):
 
         self.helper.add_input(Submit('submit', 'Submit'))
 
-    words = forms.MultipleChoiceField(
-        required=False, choices=[('smok', 'SMOK'), ('bla', 'BLA')])
+    my_choice = forms.MultipleChoiceField(
+        widget=HeavySelect2MultipleWidget(data_view='words-select'),
+        required=False)
     start_date = forms.DateTimeField(input_formats='%Y-%m-%d', required=False)
     end_date = forms.DateTimeField(input_formats='%Y-%m-%d', required=False)
