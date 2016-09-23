@@ -11,7 +11,7 @@ unwanted_words = ['a', 'albo', 'ale', 'bo', 'by', 'był', 'co', 'czy', 'dla',
 
 unwanted_chars = [',', '.', '/', '?', ';', ':', '(', ')', '!', '"', "'", '-']
 
-DASH = re.compile('(?!<=[\d])-(?!lat)')
+DASH = re.compile('(?!<=[\d])-(?!lat|let|dni|mie)')
 dot_or_colon = '(?!<=[\d]){0}(?![\d])'
 DOT = re.compile(dot_or_colon.format('\.'))
 COLON = re.compile(dot_or_colon.format(','))
