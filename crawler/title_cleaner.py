@@ -12,6 +12,11 @@ unwanted_words = ['a', 'albo', 'ale', 'bo', 'by', 'był', 'co', 'czy', 'dla',
 unwanted_chars = [',', '.', '/', '?', ';', ':',
                   '(', ')', '!', '„', '”', '"', "'", '-']
 
+DASH = re.compile('(?!<=[\d])-(?!lat|let|dni|mie)')
+dot_or_colon = '(?!<=[\d]){0}(?![\d])'
+DOT = re.compile(dot_or_colon.format('\.'))
+COLON = re.compile(dot_or_colon.format(','))
+
 
 class TitleCleaner:
 
@@ -28,13 +33,10 @@ class TitleCleaner:
         title_copy = ''.join(self.title)
         for char in unwanted_chars:
             if '-' == char and char in title_copy:
-                pat = '(?!<=[\d])-(?!((l[a,e]t)|(mie|dzienne|dniowe|wieczn)))'
-                title_copy = re.sub(pat, '', title_copy)
-
+                title_copy = re.sub(DASH, '', title_copy)
             elif (',' == char or '.' == char) and char in title_copy:
-                char_match = '\.' if '.' == char else ','
-                title_copy = re.sub('(?!<=[\d]){}(?![\d])'.format(
-                    char_match), '', title_copy)
+                accurate_pattern = DOT if '.' == char else COLON
+                title_copy = re.sub(accurate_pattern, '', title_copy)
             else:
                 title_copy = title_copy.replace(char, "")
         return title_copy
