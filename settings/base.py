@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'stats',
     'django.contrib.sites',
     'crispy_forms',
-    'django_select2',
 ]
 
 MIDDLEWARE = [
@@ -120,9 +119,6 @@ REST_FRAMEWORK = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
-SELECT2_JS = 'js/select2.min.js'
-SELECT2_CSS = 'css/select2.css'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ['*']
