@@ -31,3 +31,23 @@ class TestWordsList(TestCase):
 
         self.assertContains(response, self.word1.name)
         self.assertContains(response, self.word2.name)
+
+    def test_returns_error_msg_on_invalid_form(self):
+        response = self.client.get('{0}?start_date=some'.format(self.url))
+        self.assertContains(response,
+                            '<div id="div_id_start_date" class="form-group has-error">')
+
+    def test_returns_words_occured_only_in_range(self):
+        f = Factory()
+        from django.utils.timezone import datetime
+        word3 = f.create_word_rate_occurence('test3', 'source1',
+                                             dt=datetime(2015, 5, 5, 12))
+
+        word4 = f.create_word_rate_occurence('test4', 'source1',
+                                             dt=datetime(2015, 5, 8, 12))
+
+        response = self.client.get(
+            '{0}?start_date=2015-05-05&end_date=2015-05-06'.format(self.url))
+
+        self.assertContains(response, word3.name)
+        self.assertNotContains(response, word4.name)
