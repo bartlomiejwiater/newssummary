@@ -5,6 +5,6 @@ from api.words import WordsList
 from api.links import LinksList
 
 urlpatterns = [
-    url(r'^api/words/', WordsList.as_view(), name='words-list'),
-    url(r'^api/links/', LinksList.as_view(), name='links-list'),
+    url(r'^words/', WordsList.as_view(), name='words-list'),
+    url(r'^links/', LinksList.as_view(), name='links-list'),
 ]

@@ -121,3 +121,5 @@ REST_FRAMEWORK = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
