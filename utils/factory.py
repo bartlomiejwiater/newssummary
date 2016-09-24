@@ -6,7 +6,7 @@ from django.utils.timezone import datetime, make_aware
 
 class Factory(object):
 
-    def create_word_rate_occurence(self, name, source, dt, rate=1):
+    def create_word_rate_occurence(self, name, source, dt=datetime.now(), rate=1):
         word, created = Word.objects.get_or_create(name=name)
 
         timestamp = make_aware(dt)
@@ -18,7 +18,7 @@ class Factory(object):
 
         return word
 
-    def create_link_rate_occurence(self, title, address, source, dt, rate=1):
+    def create_link_rate_occurence(self, title, address, source, dt=datetime.now(), rate=1):
         link, created = Link.objects.get_or_create(
             title=title, address=address)
         timestamp = make_aware(dt)
