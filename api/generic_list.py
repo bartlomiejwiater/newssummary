@@ -34,6 +34,11 @@ class GenericList(APIView):
         if 'words' in request.GET and self.list_class == Link:
             wanted_words = request.GET.getlist('words')
             entries = self.fiter_links_according_to_word(entries, wanted_words)
+        elif 'words' in request.GET and self.list_class == Word:
+            # TODO: Write tests
+            wanted_words = request.GET.getlist('words')
+            print(wanted_words)
+            entries = entries.filter(name__in=wanted_words)
 
         entries = self.filter(entries, **filter_kwargs)
         entries = entries.annotate(

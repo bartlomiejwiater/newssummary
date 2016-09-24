@@ -7,7 +7,7 @@ from rest_framework import status
 from django.utils.timezone import datetime
 from furl import furl
 
-from api.tests.factory import Factory
+from utils.factory import Factory
 
 
 class TestWordsList(APITestCase, Factory):
